@@ -1,0 +1,19 @@
+name: 'Run Fishstick'
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run Fishstick Action
+        uses: jason7c/glowing-fishstick@main
+        env:
+          TZ: ${{ secrets.TZ }}
+          VNC_PW: ${{ secrets.VNC_PW }}
+          VNC_RESOLUTION: ${{ secrets.VNC_RESOLUTION }}
+          FRP_SERVER_ADDR: ${{ secrets.FRP_SERVER_ADDR }}
+          FRP_CUSTOM_DOMAINS: ${{ secrets.FRP_CUSTOM_DOMAINS }}
