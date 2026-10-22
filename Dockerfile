@@ -3,7 +3,7 @@ ARG FRP_SERVER_ADDR
 ARG FRP_CUSTOM_DOMAINS
 USER root
 ADD frpc.toml /etc/frpc.toml
-RUN apt update && apt install -y curl fastfetch
+#RUN apt update && apt install -y curl fastfetch
 RUN wget -q https://github.com/fatedier/frp/releases/download/v0.71.1/frp_0.71.1_linux_amd64.tar.gz \
     && tar -xzvf frp*linux_amd64.tar.gz && mv ./frp*linux_amd64/frpc /usr/bin && rm -rf ./frp* \
     && domains_list="" \
