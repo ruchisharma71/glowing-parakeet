@@ -1,0 +1,17 @@
+serverAddr = "__FRP_SERVER_ADDR__"
+serverPort = 7000
+loginFailExit = false
+
+[[proxies]]
+name = "sampoorn-http"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 6901
+customDomains = ["__FRP_CUSTOM_DOMAINS__"]
+
+[[proxies]]
+name = "sampoorn-tcp"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 5901
+remotePort = 5901
