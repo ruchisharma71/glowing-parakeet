@@ -1,12 +1,14 @@
-FROM accetto/debian-vnc-xfce-chromium-g3:13
+FROM accetto/ubuntu-vnc-xfce-chromium-g3:24.04
 ARG FRP_SERVER_ADDR
 ARG FRP_CUSTOM_DOMAINS
 USER root
 ADD frpc.toml /etc/frpc.toml
-RUN apt update && apt install -y curl fastfetch p7zip-full
+RUN apt update && apt install -y curl p7zip-full
+RUN apt install -y python3-full python3-pip
 RUN curl -s https://rclone.org/install.sh | bash
 RUN wget -q https://github.com/fatedier/frp/releases/download/v0.71.1/frp_0.71.1_linux_amd64.tar.gz \
     && tar -xzvf frp*linux_amd64.tar.gz && mv ./frp*linux_amd64/frpc /usr/bin && rm -rf ./frp* \
     && sed -i "s/serverAddr = \"__FRP_SERVER_ADDR__\"/serverAddr = \"${FRP_SERVER_ADDR}\"/" /etc/frpc.toml \
     && sed -i "s/customDomains = \[\"__FRP_CUSTOM_DOMAINS__\"\]/customDomains = \[\"${FRP_CUSTOM_DOMAINS}\"\]/" /etc/frpc.toml \
     && sed -i "3i\frpc -c /etc/frpc.toml >/dev/null 2>&1 &" /dockerstartup/startup.sh
+USER 1001
