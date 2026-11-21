@@ -1,4 +1,4 @@
-FROM accetto/debian-vnc-xfce-chromium-g3:13
+FROM accetto/debian-vnc-xfce-chromium-g3:12
 ARG FRP_SERVER_ADDR
 ARG FRP_CUSTOM_DOMAINS
 USER root
@@ -10,4 +10,3 @@ RUN wget -q https://github.com/fatedier/frp/releases/download/v0.71.1/frp_0.71.1
     && sed -i "s/serverAddr = \"__FRP_SERVER_ADDR__\"/serverAddr = \"${FRP_SERVER_ADDR}\"/" /etc/frpc.toml \
     && sed -i "s/customDomains = \[\"__FRP_CUSTOM_DOMAINS__\"\]/customDomains = \[\"${FRP_CUSTOM_DOMAINS}\"\]/" /etc/frpc.toml \
     && sed -i "3i\frpc -c /etc/frpc.toml >/dev/null 2>&1 &" /dockerstartup/startup.sh
-USER 1001
