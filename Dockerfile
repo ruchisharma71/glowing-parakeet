@@ -1,10 +1,9 @@
-FROM accetto/ubuntu-vnc-xfce-chromium-g3:24.04
+FROM accetto/debian-vnc-xfce-chromium-g3:13
 ARG FRP_SERVER_ADDR
 ARG FRP_CUSTOM_DOMAINS
 USER root
 ADD frpc.toml /etc/frpc.toml
-RUN apt update && apt install -y curl p7zip-full
-RUN apt install -y python3-full python3-pip
+RUN apt update && apt install -y curl p7zip-full fastfetch
 RUN curl -s https://rclone.org/install.sh | bash
 RUN wget -q https://github.com/fatedier/frp/releases/download/v0.71.1/frp_0.71.1_linux_amd64.tar.gz \
     && tar -xzvf frp*linux_amd64.tar.gz && mv ./frp*linux_amd64/frpc /usr/bin && rm -rf ./frp* \
